@@ -26,6 +26,7 @@ import AuthCheck from './utils/authcheck';
 import history from './utils/history';
 
 import { Router, Route, Switch, Redirect } from 'react-router';
+import HooksContextForm from './hooks/hooks_context';
 
 
 
@@ -82,6 +83,7 @@ class Routes extends Component {
             <Route path="/listitem/:id" component={RenderListItem} />
 
             <Route path="/hooksform" component={HooksForm1} />
+            <Route path="/hookscontextform" component={HooksContextForm} />
             <Route path="/hookscontainer" component={HooksContainer1} />
 
             <PrivateRoute path="/privateroute" auth={auth} component={PrivateComponent} />

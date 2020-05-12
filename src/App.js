@@ -4,6 +4,8 @@ import Context from './utils/context';
 import * as ACTIONS from './store/actions/actions';
 import * as Reducer1 from './store/hooks_state/reducer1_hooks';
 import * as UserReducer from './store/hooks_state/user_reducer_hooks';
+import * as ContextFormReducer from './store/hooks_state/context_form_reducer_hooks';
+
 
 
 
@@ -12,6 +14,8 @@ const App = () => {
 
   const [stateReducer1, dispatchReducer1] = useReducer(Reducer1.Reducer1, Reducer1.initialState)
   const [stateContext, dispatchContext] = useReducer(UserReducer.UserReducer, UserReducer.initialState)
+  const [formStateContext, formDispatchContext] = useReducer(ContextFormReducer.ContextFormReducer, ContextFormReducer.initialState)
+  
 
   const incrementValueGlobal = () => {
     setValueGlobal(valueGlobal + 1 )
@@ -42,7 +46,17 @@ const App = () => {
     event.persist();
     dispatchContext(ACTIONS.user_input_submit(event.target.useContext.value))
   };
+  
+  const formHandleuseContextChange = (event) => {
+    formDispatchContext(ACTIONS.user_input_change(event.target.value))
+  };
 
+  const formHandleuseContextSubmit = (event) => {
+    event.preventDefault();
+    event.persist();
+    formDispatchContext(ACTIONS.user_input_submit(event.target.useContext.value))
+  };
+  
     return(
       <div>
       React
@@ -59,7 +73,12 @@ const App = () => {
             useContextChangeState: stateContext.user_textChange,
             useContextSubmitState: stateContext.user_textSubmit,
             useContextSubmit: (event) => handleuseContextSubmit(event),
-            useContextChange: (event) => handleuseContextChange(event)
+            useContextChange: (event) => handleuseContextChange(event),
+            useFormContextChangeState: formStateContext.user_textChange,
+            useFormContextSubmitState: formStateContext.user_textSubmit,
+            formUseContextSubmit: (event) => formHandleuseContextSubmit(event),
+            formUseContextChange: (event) => formHandleuseContextChange(event),
+          
           }}>
         <Routes />
       </Context.Provider>

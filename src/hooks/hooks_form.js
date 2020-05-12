@@ -66,7 +66,10 @@ const HooksForm1 = () => {
         <p>Submit: {context.useContextSubmitState}</p>
         <br />
         <br />
+        <p>Change: {context.useFormContextChangeState}</p>
       </div>
+
+      
     )
 }
 
